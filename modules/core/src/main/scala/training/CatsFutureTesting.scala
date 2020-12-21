@@ -14,11 +14,11 @@ object CatsFutureTesting extends App {
     Try(str.toInt).toEither
 
   val v1: EitherT[Future, Throwable, Int] = EitherT.fromEither(1.asRight)
-  val v2: EitherT[Future, Throwable, Int]  = EitherT.fromEither(strToIntEither("30"))
+  val v2: EitherT[Future, Throwable, Int] = EitherT.fromEither(strToIntEither("30"))
   val optionResult = for {
     i <- v1
     i2 <- v2
-  }  yield i+i2
+  } yield i + i2
 
   println(Await.result(optionResult.value, Duration.Inf))
 

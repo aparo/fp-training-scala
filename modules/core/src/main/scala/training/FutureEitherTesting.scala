@@ -1,13 +1,11 @@
 package training
 
-
 import scala.concurrent._
 import scala.concurrent.duration.Duration
 import scala.util.Try
 
-
-object FutureEitherTesting extends App{
-  implicit val ec=scala.concurrent.ExecutionContext.global
+object FutureEitherTesting extends App {
+  implicit val ec = scala.concurrent.ExecutionContext.global
 
   def strToIntEither(str: String): Either[Throwable, Int] =
     Try(str.toInt).toEither
@@ -18,13 +16,12 @@ object FutureEitherTesting extends App{
     i <- v1
     i2 <- v2
   } yield {
-    for{
+    for {
       value1 <- i
       value2 <- i2
-    } yield value1+value2
+    } yield value1 + value2
   }
 
-
-  println(Await.result(optionResult, Duration.Inf) )
+  println(Await.result(optionResult, Duration.Inf))
 
 }

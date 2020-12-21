@@ -13,16 +13,14 @@ object LogForCats extends IOApp {
   // Arbitrary Local Function Declaration
   def doSomething[F[_]: Sync]: F[Unit] =
     Logger[F].info("Logging Start Something") *>
-      Sync[F].delay(println("I could be doing anything"))
-        .attempt.flatMap{
-        case Left(e) => Logger[F].error(e)("Something Went Wrong")
-        case Right(_) => Sync[F].pure(())
-      }
+        Sync[F].delay(println("I could be doing anything")).attempt.flatMap {
+          case Left(e)  => Logger[F].error(e)("Something Went Wrong")
+          case Right(_) => Sync[F].pure(())
+        }
 
   override def run(args: List[String]): IO[ExitCode] =
     for {
-      _      <- doSomething[IO]
+      _ <- doSomething[IO]
     } yield ExitCode.Success
-
 
 }

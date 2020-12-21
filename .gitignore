@@ -25,4 +25,5 @@ tests.iml
 docs/src/main/tut/contributing.md
 .ignore
 result*
-
+.vscode
+.bsp

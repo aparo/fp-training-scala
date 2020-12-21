@@ -3,33 +3,33 @@ import sbt._
 object Dependencies {
 
   object Versions {
-    val cats            = "2.1.0"
-    val catsEffect      = "2.0.0"
-    val catsMeowMtl     = "0.4.0"
-    val catsRetry       = "1.1.0"
-    val circe           = "0.13.0-RC1"
-    val circeDerivation = "0.12.0-M7"
-    val ciris           = "1.0.4"
+    val cats            = "2.3.1"
+    val catsEffect      = "2.3.1"
+    val catsMeowMtl     = "0.4.1"
+    val catsRetry       = "2.1.0"
+    val circe           = "0.13.0"
+    val circeDerivation = "0.13.0-M5"
+    val ciris           = "1.2.1"
     val javaxCrypto     = "1.0.1"
-    val fs2             = "2.2.1"
-    val http4s          = "0.21.0-RC1"
-    val http4sJwtAuth   = "0.0.4"
-    val log4cats        = "1.0.1"
-    val newtype         = "0.4.3"
-    val refined         = "0.9.10"
-    val redis4cats      = "0.9.2"
-    val skunk           = "0.0.7"
-    val squants         = "1.6.0"
+    val fs2             = "2.4.6"
+    val http4s          = "0.21.14"
+    val http4sJwtAuth   = "0.0.5"
+    val log4cats        = "1.1.1"
+    val newtype         = "0.4.4"
+    val refined         = "0.9.19"
+    val redis4cats      = "0.11.0"
+    val skunk           = "0.0.21"
+    val squants         = "1.7.0"
 
     val betterMonadicFor = "0.3.1"
-    val kindProjector    = "0.11.0"
+    val kindProjector    = "0.11.2"
     val logback          = "1.2.3"
 
-    val scalaCheck    = "1.14.3"
-    val scalaTest     = "3.1.0"
+    val scalaCheck    = "1.15.2"
+    val scalaTest     = "3.2.3"
     val scalaTestPlus = "3.1.0.1"
 
-    val zio = "1.0.0-RC17"
+    val zio = "1.0.3"
   }
 
   object Libraries {
@@ -90,7 +90,7 @@ object Dependencies {
     // zio
     val zio            = "dev.zio" %% "zio"              % Versions.zio
     val zioStreams     = "dev.zio" %% "zio-streams"      % Versions.zio
-    val zioInteropCats = "dev.zio" %% "zio-interop-cats" % "2.0.0.0-RC10"
+    val zioInteropCats = "dev.zio" %% "zio-interop-cats" % "2.2.0.1"
     val zioTest        = "dev.zio" %% "zio-test"         % Versions.zio
     val zioTestSBT     = "dev.zio" %% "zio-test-sbt"     % Versions.zio
   }

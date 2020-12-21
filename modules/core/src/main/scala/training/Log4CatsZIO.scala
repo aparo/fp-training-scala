@@ -14,11 +14,10 @@ object Log4CatsZIO extends App {
   // Arbitrary Local Function Declaration
   def doSomething[F[_]: Sync]: F[Unit] =
     Logger[F].info("Logging Start Something") *>
-      Sync[F].delay(println("I could be doing anything"))
-        .attempt.flatMap{
-        case Left(e) => Logger[F].error(e)("Something Went Wrong")
-        case Right(_) => Sync[F].pure(())
-      }
+        Sync[F].delay(println("I could be doing anything")).attempt.flatMap {
+          case Left(e)  => Logger[F].error(e)("Something Went Wrong")
+          case Right(_) => Sync[F].pure(())
+        }
 
   override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, Int] =
     doSomething[zio.Task]
