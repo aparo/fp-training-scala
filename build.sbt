@@ -31,7 +31,7 @@ lazy val tests = (project in file("modules/tests"))
       Libraries.zioTestSBT
     )
   )
-  .dependsOn(core)
+  .dependsOn(core, zio)
 
 lazy val core = (project in file("modules/core"))
   .settings(
@@ -76,6 +76,40 @@ lazy val core = (project in file("modules/core"))
       Libraries.zio,
       Libraries.zioStreams,
       Libraries.zioInteropCats,
+      //testing
+      Libraries.zioTest    % Test,
+      Libraries.zioTestSBT % Test
+    )
+  )
+
+lazy val zio = (project in file("modules/zio"))
+  .settings(
+    name := "fp-training-zio",
+    scalacOptions += "-Ymacro-annotations",
+    scalafmtOnCompile := true,
+    resolvers += Resolver.sonatypeRepo("snapshots"),
+    testFrameworks ++= Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
+    Defaults.itSettings,
+    libraryDependencies ++= Seq(
+      compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
+      compilerPlugin(Libraries.betterMonadicFor),
+      Libraries.circeCore,
+      Libraries.circeDerivation,
+      Libraries.circeParser,
+      Libraries.circeRefined,
+      Libraries.betterFiles,
+      Libraries.logback % Runtime,
+      // logging
+      Libraries.zioLogging,
+      Libraries.zioLoggingSlf4j,
+      Libraries.zioConfig,
+      Libraries.zioConfigMagnolia,
+      Libraries.zioConfigTypesafe,
+      Libraries.zio,
+      Libraries.zioStreams,
+      Libraries.zioInteropCats,
+      // http
+      Libraries.sttpClient,
       //testing
       Libraries.zioTest    % Test,
       Libraries.zioTestSBT % Test

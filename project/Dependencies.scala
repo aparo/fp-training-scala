@@ -3,6 +3,7 @@ import sbt._
 object Dependencies {
 
   object Versions {
+    val betterfiles     = "3.9.1"
     val cats            = "2.3.1"
     val catsEffect      = "2.3.1"
     val catsMeowMtl     = "0.4.1"
@@ -30,6 +31,8 @@ object Dependencies {
     val scalaTestPlus = "3.1.0.1"
 
     val zio = "1.0.3"
+    val zioConfig = "1.0.0-RC31-1"
+    val zioLogging = "0.5.4"
   }
 
   object Libraries {
@@ -44,6 +47,7 @@ object Dependencies {
     val squants     = "org.typelevel"    %% "squants"       % Versions.squants
     val fs2         = "co.fs2"           %% "fs2-core"      % Versions.fs2
 
+    lazy val betterFiles         = "com.github.pathikrit"       %% "better-files"         % Versions.betterfiles
     val circeCore       = circe("circe-core")
     val circeDerivation = "io.circe" %% "circe-derivation-annotations" % Versions.circeDerivation
     val circeGeneric    = circe("circe-generic")
@@ -93,6 +97,18 @@ object Dependencies {
     val zioInteropCats = "dev.zio" %% "zio-interop-cats" % "2.2.0.1"
     val zioTest        = "dev.zio" %% "zio-test"         % Versions.zio
     val zioTestSBT     = "dev.zio" %% "zio-test-sbt"     % Versions.zio
+
+    val sttpClient="com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % "3.0.0-RC13"
+
+    // zio-logging
+    lazy val zioLogging      = "dev.zio" %% "zio-logging"       % Versions.zioLogging
+    lazy val zioLoggingSlf4j = "dev.zio" %% "zio-logging-slf4j" % Versions.zioLogging
+    // zio-config
+    lazy val zioConfig = "dev.zio" %% "zio-config" % Versions.zioConfig
+    lazy val zioConfigMagnolia = "dev.zio" %% "zio-config-magnolia" % Versions.zioConfig
+    lazy val zioConfigTypesafe = "dev.zio" %% "zio-config-typesafe" % Versions.zioConfig
+
   }
+
 
 }
