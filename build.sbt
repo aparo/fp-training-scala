@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "fp-training"
   )
-  .aggregate(core, tests)
+  .aggregate(core, zio, tests)
 
 lazy val tests = (project in file("modules/tests"))
   .configs(IntegrationTest)
@@ -76,6 +76,7 @@ lazy val core = (project in file("modules/core"))
       Libraries.zio,
       Libraries.zioStreams,
       Libraries.zioInteropCats,
+      
       //testing
       Libraries.zioTest    % Test,
       Libraries.zioTestSBT % Test

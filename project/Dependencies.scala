@@ -12,27 +12,27 @@ object Dependencies {
     val circeDerivation = "0.13.0-M5"
     val ciris           = "1.2.1"
     val javaxCrypto     = "1.0.1"
-    val fs2             = "2.4.6"
-    val http4s          = "0.21.14"
+    val fs2             = "2.5.0"
+    val http4s          = "0.21.18"
     val http4sJwtAuth   = "0.0.5"
     val log4cats        = "1.1.1"
     val newtype         = "0.4.4"
-    val refined         = "0.9.19"
-    val redis4cats      = "0.11.0"
-    val skunk           = "0.0.21"
+    val refined         = "0.9.20"
+    val redis4cats      = "0.11.1"
+    val skunk           = "0.0.23"
     val squants         = "1.7.0"
 
     val betterMonadicFor = "0.3.1"
-    val kindProjector    = "0.11.2"
+    val kindProjector    = "0.11.3"
     val logback          = "1.2.3"
 
     val scalaCheck    = "1.15.2"
     val scalaTest     = "3.2.3"
-    val scalaTestPlus = "3.1.0.1"
+    val scalaTestPlus = "3.2.2.0"
 
-    val zio = "1.0.3"
-    val zioConfig = "1.0.0-RC31-1"
-    val zioLogging = "0.5.4"
+    val zio = "1.0.4-2"
+    val zioConfig = "1.0.0-RC32"
+    val zioLogging = "0.5.6"
   }
 
   object Libraries {
