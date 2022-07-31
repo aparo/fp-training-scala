@@ -4,35 +4,36 @@ object Dependencies {
 
   object Versions {
     val betterfiles     = "3.9.1"
-    val cats            = "2.3.1"
-    val catsEffect      = "2.3.1"
-    val catsMeowMtl     = "0.4.1"
-    val catsRetry       = "2.1.0"
-    val circe           = "0.13.0"
+    val cats            = "2.8.0"
+    val catsEffect      = "3.3.14"
+    val catsMeowMtl     = "0.5.0"
+    val catsRetry       = "3.1.0"
+    val circe           = "0.14.2"
     val circeDerivation = "0.13.0-M5"
-    val ciris           = "1.2.1"
+    val ciris           = "2.3.3"
     val javaxCrypto     = "1.0.1"
-    val fs2             = "2.5.0"
-    val http4s          = "0.21.18"
-    val http4sJwtAuth   = "0.0.5"
+    val fs2             = "3.2.11"
+    val http4s          = "1.0.0-M35"
+    val http4sJwtAuth   = "1.0.0"
     val log4cats        = "1.1.1"
     val newtype         = "0.4.4"
-    val refined         = "0.9.20"
-    val redis4cats      = "0.11.1"
-    val skunk           = "0.0.23"
-    val squants         = "1.7.0"
+    val refined         = "0.10.1"
+    val redis4cats      = "1.2.0"
+    val skunk           = "0.3.1"
+    val squants         = "1.8.3"
 
     val betterMonadicFor = "0.3.1"
-    val kindProjector    = "0.11.3"
-    val logback          = "1.2.3"
+    val kindProjector    = "0.13.2"
+    val logback          = "1.2.11"
 
-    val scalaCheck    = "1.15.2"
-    val scalaTest     = "3.2.3"
+    val scalaCheck    = "1.16.0"
+    val scalaTest     = "3.2.13"
     val scalaTestPlus = "3.2.2.0"
 
-    val zio = "1.0.4-2"
-    val zioConfig = "1.0.0-RC32"
-    val zioLogging = "0.5.6"
+    val zio        = "2.0.0"
+    val zioConfig  = "3.0.1"
+    val zioLogging = "2.0.1"
+    val zioJson    = "0.3.0-RC9"
   }
 
   object Libraries {
@@ -47,12 +48,12 @@ object Dependencies {
     val squants     = "org.typelevel"    %% "squants"       % Versions.squants
     val fs2         = "co.fs2"           %% "fs2-core"      % Versions.fs2
 
-    lazy val betterFiles         = "com.github.pathikrit"       %% "better-files"         % Versions.betterfiles
-    val circeCore       = circe("circe-core")
-    val circeDerivation = "io.circe" %% "circe-derivation-annotations" % Versions.circeDerivation
-    val circeGeneric    = circe("circe-generic")
-    val circeParser     = circe("circe-parser")
-    val circeRefined    = circe("circe-refined")
+    lazy val betterFiles = "com.github.pathikrit" %% "better-files" % Versions.betterfiles
+    val circeCore        = circe("circe-core")
+    val circeDerivation  = "io.circe" %% "circe-derivation-annotations" % Versions.circeDerivation
+    val circeGeneric     = circe("circe-generic")
+    val circeParser      = circe("circe-parser")
+    val circeRefined     = circe("circe-refined")
 
     val cirisCore    = ciris("ciris")
     val cirisEnum    = ciris("ciris-enumeratum")
@@ -94,21 +95,22 @@ object Dependencies {
     // zio
     val zio            = "dev.zio" %% "zio"              % Versions.zio
     val zioStreams     = "dev.zio" %% "zio-streams"      % Versions.zio
-    val zioInteropCats = "dev.zio" %% "zio-interop-cats" % "2.2.0.1"
+    val zioInteropCats = "dev.zio" %% "zio-interop-cats" % "22.0.0.0"
     val zioTest        = "dev.zio" %% "zio-test"         % Versions.zio
     val zioTestSBT     = "dev.zio" %% "zio-test-sbt"     % Versions.zio
 
-    val sttpClient="com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % "3.0.0-RC13"
+    val sttpClient = "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % "3.7.2"
+
+    val zioJSON = "dev.zio" %% "zio-json" % Versions.zioJson
 
     // zio-logging
     lazy val zioLogging      = "dev.zio" %% "zio-logging"       % Versions.zioLogging
     lazy val zioLoggingSlf4j = "dev.zio" %% "zio-logging-slf4j" % Versions.zioLogging
     // zio-config
-    lazy val zioConfig = "dev.zio" %% "zio-config" % Versions.zioConfig
+    lazy val zioConfig         = "dev.zio" %% "zio-config"          % Versions.zioConfig
     lazy val zioConfigMagnolia = "dev.zio" %% "zio-config-magnolia" % Versions.zioConfig
     lazy val zioConfigTypesafe = "dev.zio" %% "zio-config-typesafe" % Versions.zioConfig
 
   }
-
 
 }

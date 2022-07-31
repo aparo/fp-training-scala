@@ -8,7 +8,6 @@ import zio._
 
 object ZioEffectTest extends App {
 
-
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
     myAppLogic.exitCode
 //  myAppLogic2.exitCode
