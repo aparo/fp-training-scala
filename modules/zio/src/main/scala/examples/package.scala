@@ -1,39 +1,40 @@
 import com.typesafe.config.Config
 import examples.example.{ ExampleConfig, ExampleService }
 import sttp.client3.asynchttpclient.zio._
-import zio.ZLayer
-import zio.config.typesafe.TypesafeConfig
-import zio.logging.LogAnnotation.{ Cause, CorrelationId, Level, Name, Throwable }
-import zio.logging.Logging
-import zio.logging.slf4j.Slf4jLogger
+import sttp.client3.{ SttpBackend, SttpBackendOptions }
+import sttp.capabilities.WebSockets
+import sttp.capabilities.zio.ZioStreams
+import zio.config.typesafe._
+import zio.logging.LogAnnotation._
 import zio._
-import zio.blocking.Blocking
-import zio.clock.Clock
+import zio.logging.backend.SLF4J
 import zio.config._
-import zio.config.magnolia.DeriveConfigDescriptor
+import zio.config.magnolia._
 import zio.config.syntax._
-import zio.console.Console
-
+import zio.logging.{ LogAnnotation, LogFormat }
 package object examples {
 
-  type AppEnvironment = Logging with Has[SttpClient.Service] with Has[ExampleService.Service] with ZEnv
+  type AppEnvironment = SttpBackend[Task, ZioStreams with WebSockets] with ExampleService.Service
 
   def buildApplicationLayer(config: Config): ZLayer[Any, Throwable, AppEnvironment] = {
-    val logLayer: ZLayer[Any, Nothing, Logging] =
-      Slf4jLogger.makeWithAnnotationsAsMdc(List(Cause, Throwable, Name, Level, CorrelationId))
+    val logger =
+      Runtime.removeDefaultLoggers >>> SLF4J.slf4j(
+            LogLevel.Info,
+            LogFormat.annotation(LogAnnotation.TraceId) |-| LogFormat.annotation(
+                  "user"
+                ) |-| LogFormat.line |-| LogFormat.cause
+          )
 
     val configLayer = ZLayer.succeed(config)
 
-    val environment = ZEnv.live
-
-    val configDescription = DeriveConfigDescriptor.descriptor[RootConfig].mapKey(toKebabCase)
-    val cfg               = TypesafeConfig.fromTypesafeConfig(config, configDescription)
+    val configDescription = descriptor[RootConfig].mapKey(toKebabCase)
+    val cfg               = TypesafeConfig.fromTypesafeConfig(ZIO.succeed(config), configDescription)
 
     val httpLayer = AsyncHttpClientZioBackend.layer()
 
     val exampleLayer: ZLayer[Any, Throwable, ExampleService.ExampleService] =
-      (logLayer ++ cfg.narrow(_.example) ++ httpLayer) >>> ExampleService.live
+      (logger ++ cfg.narrow(_.example) ++ httpLayer) >>> ExampleService.live
 
-    environment ++ logLayer ++ exampleLayer ++ httpLayer
+    exampleLayer ++ httpLayer
   }
 }

@@ -1,14 +1,16 @@
 package examples.example
 
-import sttp.client3.asynchttpclient.zio.SttpClient
+import sttp.capabilities.WebSockets
+import sttp.capabilities.zio.ZioStreams
+import sttp.client3.{ SttpBackend, SttpBackendOptions }
+
 import zio._
-import zio.logging.{ Logger, Logging }
 
 // generator: zio.environment: app.example.AppEnvironment
 
 object ExampleService {
 
-  type ExampleService = Has[Service]
+  type ExampleService = Service
 
   trait Service {
 
@@ -22,18 +24,19 @@ object ExampleService {
 
   }
   // services
-  val live: ZLayer[Logging with Has[SttpClient.Service] with Has[ExampleConfig], Throwable, Has[Service]] =
-    ZLayer.fromServicesM[Logger[String], SttpClient.Service, ExampleConfig, Any, Throwable, Service] {
-      (logger, httpClient, exampleConfig) =>
-        for {
-          _ <- logger.debug("Init example service")
-        } yield ExampleServiceImpl(logger = logger, httpclient = httpClient, exampleConfig = exampleConfig)
+  val live: ZLayer[SttpBackend[Task, ZioStreams with WebSockets] with ExampleConfig, Throwable, Service] =
+    ZLayer {
+      for {
+        _ <- ZIO.logDebug("Init example service")
+        httpClient <- ZIO.service[SttpBackend[Task, ZioStreams with WebSockets]]
+        exampleConfig <- ZIO.service[ExampleConfig]
+
+      } yield ExampleServiceImpl(httpclient = httpClient, exampleConfig = exampleConfig)
     }
 }
 
 private[example] case class ExampleServiceImpl(
-    logger: Logger[String],
-    httpclient: SttpClient.Service,
+    httpclient: SttpBackend[Task, ZioStreams with WebSockets],
     exampleConfig: ExampleConfig
 ) extends ExampleService.Service {
 
@@ -44,5 +47,5 @@ private[example] case class ExampleServiceImpl(
     * @return a list of values
     */
   override def singleToList(text: String): ZIO[Any, Throwable, List[String]] =
-    ZIO.effect(List.fill(exampleConfig.repetition)(text))
+    ZIO.attempt(List.fill(exampleConfig.repetition)(text))
 }

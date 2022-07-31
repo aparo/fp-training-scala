@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "fp-training"
   )
-  .aggregate(/*core,*/ zio, tests)
+  .aggregate( /*core,*/ zio, tests)
 
 lazy val tests = (project in file("modules/tests"))
   .configs(IntegrationTest)
@@ -22,16 +22,16 @@ lazy val tests = (project in file("modules/tests"))
     testFrameworks ++= Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
     Defaults.itSettings,
     libraryDependencies ++= Seq(
-      compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
-      compilerPlugin(Libraries.betterMonadicFor),
-      Libraries.scalaCheck,
-      Libraries.scalaTest,
-      Libraries.scalaTestPlus,
-      Libraries.zioTest,
-      Libraries.zioTestSBT
-    )
+          compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
+          compilerPlugin(Libraries.betterMonadicFor),
+          Libraries.scalaCheck,
+          Libraries.scalaTest,
+          Libraries.scalaTestPlus,
+          Libraries.zioTest,
+          Libraries.zioTestSBT
+        )
   )
-  .dependsOn(/*core,*/ zio)
+  .dependsOn( /*core,*/ zio)
 
 // lazy val core = (project in file("modules/core"))
 //   .settings(
@@ -76,7 +76,7 @@ lazy val tests = (project in file("modules/tests"))
 //       Libraries.zio,
 //       Libraries.zioStreams,
 //       Libraries.zioInteropCats,
-      
+
 //       //testing
 //       Libraries.zioTest    % Test,
 //       Libraries.zioTestSBT % Test
@@ -92,28 +92,28 @@ lazy val zio = (project in file("modules/zio"))
     testFrameworks ++= Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
     Defaults.itSettings,
     libraryDependencies ++= Seq(
-      compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
-      compilerPlugin(Libraries.betterMonadicFor),
-      Libraries.circeCore,
-      Libraries.circeDerivation,
-      Libraries.circeParser,
-      // Libraries.circeRefined,
-      Libraries.betterFiles,
-      Libraries.logback % Runtime,
-      Libraries.zioJson,
-      // logging
-      Libraries.zioLogging,
-      Libraries.zioLoggingSlf4j,
-      Libraries.zioConfig,
-      Libraries.zioConfigMagnolia,
-      Libraries.zioConfigTypesafe,
-      Libraries.zio,
-      Libraries.zioStreams,
-      Libraries.zioInteropCats,
-      // http
-      Libraries.sttpClient,
-      //testing
-      Libraries.zioTest    % Test,
-      Libraries.zioTestSBT % Test
-    )
+          compilerPlugin(Libraries.kindProjector cross CrossVersion.full),
+          compilerPlugin(Libraries.betterMonadicFor),
+          Libraries.circeCore,
+          Libraries.circeDerivation,
+          Libraries.circeParser,
+          // Libraries.circeRefined,
+          Libraries.betterFiles,
+          Libraries.logback % Runtime,
+          Libraries.zioJson,
+          // logging
+          Libraries.zioLogging,
+          Libraries.zioLoggingSlf4j,
+          Libraries.zioConfig,
+          Libraries.zioConfigMagnolia,
+          Libraries.zioConfigTypesafe,
+          Libraries.zio,
+          Libraries.zioStreams,
+          Libraries.zioInteropCats,
+          // http
+          Libraries.sttpClient,
+          //testing
+          Libraries.zioTest    % Test,
+          Libraries.zioTestSBT % Test
+        )
   )

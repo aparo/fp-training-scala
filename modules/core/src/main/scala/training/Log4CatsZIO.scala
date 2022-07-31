@@ -19,7 +19,7 @@ object Log4CatsZIO extends App {
           case Right(_) => Sync[F].pure(())
         }
 
-  override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, Int] =
+  override def run(args: List[String]): ZIO[zio.Clock with Console with System with Random, Nothing, Int] =
     doSomething[zio.Task]
       .fold(_ => 1, _ => 0)
 }

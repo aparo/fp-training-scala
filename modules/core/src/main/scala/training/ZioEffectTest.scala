@@ -1,20 +1,20 @@
 package training
 
 import zio.App
-import zio.console._
-import zio.duration._
-import zio.random._
+import zio.Console
+import zio.Duration
+import zio.Random._
 import zio._
 
 object ZioEffectTest extends App {
 
-  override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] =
+  override def run(args: List[String]): URIO[zio.Clock with Console with System with Random, ExitCode] =
     myAppLogic.exitCode
 //  myAppLogic2.exitCode
 //  person2.exitCode
 
-  val v1 = ZIO.effect({ println("a"); 1 })
-  val v2 = ZIO.effect({ println("b"); 2 })
+  val v1 = ZIO.attempt({ println("a"); 1 })
+  val v2 = ZIO.attempt({ println("b"); 2 })
   val v3 = ZIO.succeed(5)
 
   def func(d: Double): Double = d * 4
@@ -27,8 +27,8 @@ object ZioEffectTest extends App {
     for {
       i <- nextDouble
       _ <- putStrLn(s"double: $i")
-      i1 <- ZIO.effect(func(i)).retry(Schedule.recurs(10)).timeout(10.second).fork
-      i3 <- ZIO.effect(funcError(i)).retry(Schedule.recurs(10)).fold(_ => 0, identity).fork
+      i1 <- ZIO.attempt(func(i)).retry(Schedule.recurs(10)).timeout(10.second).fork
+      i3 <- ZIO.attempt(funcError(i)).retry(Schedule.recurs(10)).fold(_ => 0, identity).fork
       i2 <- v2
       i4 <- i1.join
       i5 <- i3.join
