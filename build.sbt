@@ -100,7 +100,7 @@ lazy val zio = (project in file("modules/zio"))
           // Libraries.circeRefined,
           Libraries.betterFiles,
           Libraries.logback % Runtime,
-          Libraries.zioJson,
+          Libraries.zioJSON,
           // logging
           Libraries.zioLogging,
           Libraries.zioLoggingSlf4j,
